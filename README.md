@@ -1,20 +1,30 @@
-# Stock AI Navigator Pro Ver.3
+# Stock AI Navigator Pro Ver.3.1（Vercel完全静的版）
 
-GitHub Pages対応のフォルダ不要版です。
+この版はHTML・CSS・JavaScriptだけで動きます。
+Pythonファイル、requirements.txt、ビルド処理はありません。
 
-## 公開方法
-1. このフォルダ内の5ファイルをGitHubリポジトリの一番上にアップロード
-2. Settings → Pages
-3. Source: Deploy from a branch
-4. Branch: main / (root)
-5. Save
+## GitHubへアップロードするファイル
+- index.html
+- style.css
+- app.js
+- stocks.json
+- manifest.webmanifest
+- sw.js
+- vercel.json
+- README.md
 
-## 主な機能
-- 日本株検索
-- お気に入り保存
-- ローソク足、RSI、MACD表示
-- AI総合評価
-- 翌日、5日、20日の予想レンジ
-- ニュース評価表示
+## Vercel公開設定
+- Framework Preset: Other
+- Root Directory: 空欄
+- Build Command: 空欄
+- Output Directory: 空欄
+- Install Command: 空欄
 
-初期データは画面確認用デモです。
+通常はGitHubリポジトリを選んで Deploy を押すだけで公開できます。
+
+## 重要
+以前のリポジトリに残っている以下のファイルは削除してください。
+- requirements.txt
+- update_data.py
+
+残っているとVercelがPythonプロジェクトと誤判定する場合があります。
