@@ -7,9 +7,9 @@ import pandas as pd
 import requests
 import yfinance as yf
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parent
 CONFIG = json.loads((ROOT / "config.json").read_text(encoding="utf-8"))
-OUT = ROOT / "data" / "stocks.json"
+OUT = ROOT / "stocks.json"
 
 
 def finite(v, default=0.0):

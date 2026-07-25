@@ -1,36 +1,44 @@
-# Stock AI Navigator Ver.2（無料データ版）
+# Stock AI Navigator Ver.2.1
 
-## 概要
-- 主取得：yfinance
-- 予備取得：Stooq CSV
-- 最終予備：前回保存した `data/stocks.json`
-- テクニカル：5/25/75日線、RSI、MACD、ボリンジャーバンド、ATR、出来高
-- 表示：翌営業日・5営業日・20営業日の評価レンジ
+## iPhone簡単アップロード版
+この版はフォルダを使用しません。以下のファイルをGitHubの同じ場所へまとめてアップロードするだけです。
+
+- index.html
+- stocks.json
+- config.json
+- manifest.webmanifest
+- sw.js
+- README.md
+- requirements.txt
+- update_data.py
+
+## GitHubへの上書き方法
+1. GitHubのリポジトリを開く
+2. 「…」または「Add file」を押す
+3. 「Upload files」を押す
+4. ZIPを展開したフォルダを開く
+5. 上記8ファイルをすべて選択する
+6. 「開く」を押す
+7. 画面下の「Commit changes」を押す
+
+同名ファイルは新しい内容で上書きされます。
+
+## 現在の仕様
+- 画面表示は `stocks.json` の保存済み株価データを使用
+- RSI、MACD、移動平均、出来高、ATR評価
+- 翌営業日・5営業日・20営業日の評価レンジ
 - iPhone対応PWA
 
-## 最初の確認
-`index.html` はローカルファイル直開きではJSON取得が制限される場合があります。以下のいずれかで開いてください。
-
-### パソコンで確認
-```bash
-python -m http.server 8000
-```
-ブラウザで `http://localhost:8000` を開きます。
-
-### 株価データを更新
+## 株価データの手動更新（パソコン利用時）
 ```bash
 pip install -r requirements.txt
-python scripts/update_data.py
+python update_data.py
 ```
 
-## GitHubで毎営業日自動更新
-`.github/workflows/update-stock-data.yml` が平日16:30頃（日本時間）に更新します。GitHubの Actions を有効にし、リポジトリの Workflow permissions を Read and write にしてください。
+更新後の `stocks.json` をGitHubへ再度アップロードします。
 
-## Vercel公開
-このフォルダをGitHubへアップロードし、Vercelでリポジトリを選択します。Framework Presetは Other、Build Commandは空欄、Output Directoryは `.` です。
+## 自動更新について
+フォルダ不要にするため、GitHub Actionsの自動更新設定はこの版には入れていません。まずアプリ公開を完成させ、その後に自動更新だけを別工程で追加します。
 
-## 銘柄追加
-`config.json` の `symbols` に追加します。日本株はYahoo形式の `証券コード.T` を使用します。
-
-## 重要事項
-本アプリの上昇・横ばい・下落表示は、指標を点数化した「評価値」であり、将来の値動きを保証する確率ではありません。yfinanceはYahoo公式ではなく、個人・研究用途を前提とするツールです。公開・商用利用では各データ提供元の利用条件を確認してください。
+## 注意
+表示される上昇・横ばい・下落は、テクニカル指標を点数化した評価値です。将来の値動きを保証する確率ではありません。
