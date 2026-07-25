@@ -1,0 +1,10 @@
+{
+  "symbols": [
+    {"ticker": "7203.T", "code": "7203", "name": "トヨタ自動車"},
+    {"ticker": "8306.T", "code": "8306", "name": "三菱UFJフィナンシャル・グループ"},
+    {"ticker": "9984.T", "code": "9984", "name": "ソフトバンクグループ"},
+    {"ticker": "4881.T", "code": "4881", "name": "ファンペップ"}
+  ],
+  "period": "2y",
+  "interval": "1d"
+}
