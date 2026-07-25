@@ -1,1 +1,100 @@
-<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#5b4bff"><title>Stock AI Navigator Pro</title><link rel="manifest" href="manifest.webmanifest"><link rel="stylesheet" href="style.css"></head><body><main class="wrap"><section class="hero"><h1>Stock AI Navigator Pro</h1><p>日本株をカラフルに分析。検索・お気に入り・テクニカル評価・短期予想を1画面に。</p><div class="market"><div class="mcard"><b>日経平均</b><strong>39,742.18</strong><div>+0.62%</div></div><div class="mcard"><b>TOPIX</b><strong>2,812.44</strong><div>+0.41%</div></div><div class="mcard"><b>ドル／円</b><strong>146.28</strong><div>-0.18%</div></div></div></section><div class="toolbar"><input id="search" placeholder="証券コードまたは会社名"><select id="stock"></select><select id="period"><option value="30">1か月</option><option value="90" selected>3か月</option><option value="180">6か月</option><option value="250">1年</option></select><button id="favBtn">お気に入り登録</button></div><section class="grid"><article class="card summary"><div class="row"><span class="badge" id="ticker"></span><button class="fav" id="favIcon">☆</button></div><h2 id="name"></h2><div class="price" id="price"></div><div id="change"></div><p id="source" style="font-size:12px;color:#667085"></p><div class="score" id="scoreRing"><b id="score"></b></div><div class="stars" id="stars"></div><p style="text-align:center;font-weight:800" id="judgement"></p></article><article class="card chart"><div class="row"><h2>株価チャート</h2><span class="badge">ローソク足</span></div><div class="tabs" id="chartTabs"><button class="active">価格</button><button>RSI</button><button>MACD</button></div><canvas id="chart"></canvas></article><article class="card forecast"><h2>直近株価予想</h2><div class="prob"><div class="p1">上昇<br><span id="up"></span>%</div><div class="p2">横ばい<br><span id="flat"></span>%</div><div class="p3">下落<br><span id="down"></span>%</div></div><div class="ranges" id="ranges"></div></article><article class="card indicators"><h2>テクニカル指標</h2><div class="metrics"><div class="metric"><b>RSI（14）</b><strong id="rsi"></strong></div><div class="metric"><b>MACD</b><strong id="macd"></strong></div><div class="metric"><b>出来高倍率</b><strong id="volume"></strong></div><div class="metric"><b>25日線乖離</b><strong id="deviation"></strong></div></div><div class="signal" id="signal"></div></article><article class="card full"><h2>AI分析レポート</h2><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px"><div><h3>プラス材料</h3><ul id="reasons"></ul></div><div><h3>注意点</h3><ul id="cautions"></ul></div><div><h3>関連ニュース</h3><div class="news" id="news"></div></div></div><div class="note">このアプリの予想は、移動平均・RSI・MACD・出来高・値動きの強さを合成した評価です。将来の価格や利益を保証しません。売買判断は必ずご自身で行ってください。</div></article></section></main><div class="bottom"><div class="nav"><button class="active">ホーム</button><button>銘柄検索</button><button>お気に入り</button><button>設定</button></div></div><script src="app.js"></script></body></html>
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#5b5ce2" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Stock AI Navigator Pro</title>
+</head>
+<body>
+  <header class="hero">
+    <div>
+      <p class="eyebrow">STOCK AI NAVIGATOR PRO</p>
+      <h1>日本株を、見やすく分析。</h1>
+      <p class="sub">チャート・テクニカル・短期シナリオを1画面で確認</p>
+    </div>
+    <button id="themeBtn" class="iconBtn" aria-label="テーマ切替">◐</button>
+  </header>
+
+  <main class="container">
+    <section class="searchCard card">
+      <input id="searchInput" type="search" placeholder="証券コード・会社名で検索（例：7203）" />
+      <button id="searchBtn">表示</button>
+    </section>
+
+    <section class="marketGrid">
+      <article class="market red"><span>日経平均</span><strong>39,820.10</strong><small>+0.84%</small></article>
+      <article class="market blue"><span>TOPIX</span><strong>2,842.66</strong><small>+0.52%</small></article>
+      <article class="market green"><span>ドル円</span><strong>146.32</strong><small>-0.18%</small></article>
+    </section>
+
+    <section class="card stockHead">
+      <div>
+        <p id="stockCode" class="muted">7203</p>
+        <h2 id="stockName">トヨタ自動車</h2>
+      </div>
+      <div class="priceBox">
+        <strong id="stockPrice">2,894.5円</strong>
+        <span id="stockChange" class="up">+1.24%</span>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="sectionTitle"><h3>株価チャート</h3><span id="periodLabel">3か月</span></div>
+      <div class="periods" id="periods">
+        <button data-period="1か月">1か月</button>
+        <button class="active" data-period="3か月">3か月</button>
+        <button data-period="6か月">6か月</button>
+        <button data-period="1年">1年</button>
+      </div>
+      <canvas id="chart" width="760" height="360" aria-label="株価チャート"></canvas>
+      <div class="legend"><span>● 5日線</span><span>● 25日線</span><span>● 75日線</span></div>
+    </section>
+
+    <section class="scoreGrid">
+      <article class="card scoreCard">
+        <span>AI総合評価</span>
+        <strong id="score">78</strong>
+        <small>/100</small>
+        <p class="badge">やや強気</p>
+      </article>
+      <article class="card signalCard">
+        <div><span>上昇</span><strong id="upProb">56%</strong></div>
+        <div><span>横ばい</span><strong id="flatProb">26%</strong></div>
+        <div><span>下落</span><strong id="downProb">18%</strong></div>
+      </article>
+    </section>
+
+    <section class="card">
+      <div class="sectionTitle"><h3>テクニカル分析</h3><span>自動判定</span></div>
+      <div class="metrics">
+        <div><span>RSI</span><strong>58.3</strong><small>中立</small></div>
+        <div><span>MACD</span><strong>買い</strong><small>上向き</small></div>
+        <div><span>出来高</span><strong>増加</strong><small>前週比 +18%</small></div>
+        <div><span>25日線</span><strong>上向き</strong><small>株価は上側</small></div>
+      </div>
+    </section>
+
+    <section class="card forecast">
+      <div class="sectionTitle"><h3>直近シナリオ</h3><span>参考値</span></div>
+      <div class="forecastRows">
+        <div><span>翌営業日</span><strong>2,860〜2,930円</strong></div>
+        <div><span>5営業日</span><strong>2,820〜3,010円</strong></div>
+        <div><span>20営業日</span><strong>2,740〜3,150円</strong></div>
+      </div>
+      <p class="note">予測値はサンプルデータとテクニカル評価による参考表示です。将来の値動きを保証しません。</p>
+    </section>
+  </main>
+
+  <nav class="bottomNav">
+    <button class="active">ホーム</button>
+    <button>検索</button>
+    <button>お気に入り</button>
+    <button>設定</button>
+  </nav>
+
+  <script src="app.js"></script>
+</body>
+</html>
