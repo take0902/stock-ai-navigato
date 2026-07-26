@@ -1,0 +1,12 @@
+{
+  "name": "Stock AI Navigator Pro",
+  "short_name": "StockAI",
+  "description": "AI-powered Japanese stock analysis",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f4f7fb",
+  "theme_color": "#5b5ce2",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}

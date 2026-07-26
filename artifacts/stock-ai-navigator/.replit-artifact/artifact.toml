@@ -1,0 +1,27 @@
+kind = "web"
+previewPath = "/"
+title = "Stock AI Navigator Pro"
+version = "1.0.0"
+id = "artifacts/stock-ai-navigator"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 23253
+
+[services.development]
+run = "pnpm --filter @workspace/stock-ai-navigator run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/stock-ai-navigator", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/stock-ai-navigator/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "23253"
+BASE_PATH = "/"
